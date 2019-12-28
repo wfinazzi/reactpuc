@@ -3,6 +3,7 @@ import { TodoListItem } from './TodoListItem';
 
 export class TodoList extends Component {
     state = {
+        listTitle: '',
         taskItems : [
             {
                 id: 1,
@@ -22,8 +23,14 @@ export class TodoList extends Component {
         ]
     } 
 
+    componentDidMount(){
+        console.log('ChamoucomponentDidMount');
+        this.setState({listTitle: 'My list title'});
+    }
+
     
     render() {
+        console.log('Chamou render');        
 
         const handleOnToggleCompleted = (taskId, event) => {
             this.setState({
@@ -38,14 +45,17 @@ export class TodoList extends Component {
     
             console.log(this.state.taskItems);
         }    
-        return(
-            <ul>
-                {this.state.taskItems.map(task => (
-                    <li>
-                        <TodoListItem  onToggleCompleted={handleOnToggleCompleted}{... task} />                    
-                    </li>
-                ))}
-            </ul>
+        return(<div>
+                <h1>{this.state.listTitle}</h1>
+                <ul>
+                    {this.state.taskItems.map(task => (
+                        <li>
+                            <TodoListItem  onToggleCompleted={handleOnToggleCompleted}{... task} />                    
+                        </li>
+                    ))}
+                </ul>
+            </div>
+            
         )
     }
     
